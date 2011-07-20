@@ -38,5 +38,5 @@ class JsonRequester(object):
             headers=headers,
         )
 
-        if response['content-type'] == 'application/json':
+        if response['content-type'] == 'application/json' and content:
             return json.loads(content)
