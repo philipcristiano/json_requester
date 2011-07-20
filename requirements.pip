@@ -1,0 +1,7 @@
+coverage
+dingus
+httplib2
+nose
+python-dateutil==1.5.0  # http://groups.google.com/group/celery-users/browse_thread/thread/8f754dbba35d1f4
+testhttpserver==0.1.2
+-e git+https://github.com/lacostej/nosyd.git@c6bba03669084ac41d7a#egg=nosyd
