@@ -16,7 +16,6 @@ Create a new requester
 
     requester = JsonRequester('http://example.com')
 
-
 Make a request
 --------------
 
