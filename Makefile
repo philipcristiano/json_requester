@@ -14,7 +14,7 @@ test:
 	$(NOSE) tests
 
 tdd:
-	$(NOSY)
+	$(NOSYD) -1
 
 clean:
 	-$(PYTHON) setup.py clean
