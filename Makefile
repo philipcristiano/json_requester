@@ -9,6 +9,7 @@ PIP = bin/pip
 PYTHON = bin/python
 
 ## Testing ##
+.PHONY: test tdd dist clean requirements virtualenv
 test:
 	$(NOSE) tests
 
