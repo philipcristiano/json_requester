@@ -27,14 +27,20 @@ class JsonRequester(object):
     >>> requester.get('/my/api/url')
     {'content': 'my api results'}
 
-    It can also be passed a serialization function to handle objects which do
+    It can be passed a serialization function to handle objects which do
     not have a native JSON representation.  This defaults to
     :func:`default_serializer`.
-    """
 
-    def __init__(self, base_url, serializer=default_serializer):
+    It can also be passed a timeout value that is passed to
+    :class:`httplib2.Http` when creating the connection. Note that there is
+    a known issue with :class:`httplib2.Http` that may cause the actual timeout
+    to be double what is specified
+    (http://code.google.com/p/httplib2/issues/detail?id=124).
+
+    """
+    def __init__(self, base_url, serializer=default_serializer, timeout=5):
         self.base_url = base_url
-        self.http = httplib2.Http()
+        self.http = httplib2.Http(timeout=timeout)
         self.serializer = serializer
 
     def _get_full_url(self, url):

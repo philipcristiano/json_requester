@@ -42,6 +42,9 @@ class BaseCreatingJsonRequester(DingusWhitelistTestCase):
     def should_set_http(self):
         assert self.json_requester.http is self.module.httplib2.Http()
 
+    def should_create_Http_with_timeout(self):
+        assert self.module.httplib2.Http.calls('()', timeout=5)
+
 
 class WhenCreatingJsonRequesterWithDefaults(BaseCreatingJsonRequester):
 
@@ -66,3 +69,16 @@ class WhenCreatingJsonRequesterWithSerializer(BaseCreatingJsonRequester):
 
     def should_set_serializer(self):
         assert self.json_requester.serializer == self.serializer
+
+
+class WhenCreatingJsonRequesterWithTimeout(BaseCreatingJsonRequester):
+
+    additional_mocks = ['timeout']
+
+    def setup(self):
+        BaseCreatingJsonRequester.setup(self)
+
+        self.json_requester = JsonRequester(self.url, timeout=self.timeout)
+
+    def should_create_Http_with_timeout(self):
+        assert self.module.httplib2.Http.calls('()', timeout=self.timeout)
