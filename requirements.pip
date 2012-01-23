@@ -1,4 +1,5 @@
 coverage
+deterministic_dingus
 dingus
 httplib2
 nose
