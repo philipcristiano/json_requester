@@ -146,12 +146,42 @@ class WhenRequestReturnsApplicationJsonAndContentIsNotNone(
         assert self.returned == self.module.json.loads()
 
 
+class WhenRequestReturnsApplicationJavascriptAndContentIsNotNone(
+        BaseRequestTestCase, PropertyNoDataProvided):
+
+    def setup(self):
+        BaseRequestTestCase.setup(self)
+        self.response['content-type'] = 'application/javascript'
+        self.module.httplib2.Http().request.return_value = (
+            self.response, self.content)
+
+        self.returned = self.json_requester.request(self.method, self.url)
+
+    def should_return_json(self):
+        assert self.returned == self.module.json.loads()
+
+
 class WhenRequestReturnsApplicationJsonAndContentIsNone(
         BaseRequestTestCase, PropertyNoDataProvided):
 
     def setup(self):
         BaseRequestTestCase.setup(self)
         self.response['content-type'] = 'application/json'
+        self.module.httplib2.Http().request.return_value = (
+            self.response, None)
+
+        self.returned = self.json_requester.request(self.method, self.url)
+
+    def should_return_None(self):
+        assert self.returned == None
+
+
+class WhenRequestReturnsApplicationJavascriptAndContentIsNone(
+        BaseRequestTestCase, PropertyNoDataProvided):
+
+    def setup(self):
+        BaseRequestTestCase.setup(self)
+        self.response['content-type'] = 'application/javascript'
         self.module.httplib2.Http().request.return_value = (
             self.response, None)
 
