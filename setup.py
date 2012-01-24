@@ -9,7 +9,7 @@ def read(fname):
 
 setup(
     name = 'jsonrequester',
-    version = '0.1.3',
+    version = '0.1.4',
     description = 'A library for client JSON REST requests',
     packages = find_packages(),
     long_description=read('README.rst'),
