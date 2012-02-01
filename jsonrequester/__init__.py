@@ -68,6 +68,7 @@ class JsonRequester(object):
             **kwargs
         )
 
-        if (response['content-type'] == 'application/json' or
-            response['content-type'] == 'application/javascript') and content:
+        if (response['content-type'].startswith('application/json') or
+            response['content-type'].startswith('application/javascript')) \
+            and content:
             return json.loads(content)
