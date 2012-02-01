@@ -222,3 +222,39 @@ class WhenRequestWithDataReturnsApplicationJsonAndContentIsNotNone(
 
     def should_return_json(self):
         assert self.returned == self.module.json.loads()
+
+
+class WhenRequestWithDataReturnsApplicationJsonWithCharsetAndContentIsNotNone(
+        BaseRequestTestCase, PropertyDataProvided):
+
+    additional_mocks = ['data']
+
+    def setup(self):
+        BaseRequestTestCase.setup(self)
+        self.response['content-type'] = 'application/json; charset=UTF-8'
+        self.module.httplib2.Http().request.return_value = (
+            self.response, self.content)
+
+        self.returned = self.json_requester.request(
+            self.method, self.url, self.data)
+
+    def should_return_json(self):
+        assert self.returned == self.module.json.loads()
+
+
+class WhenRequestWithDataReturnsApplicationJavascriptWithCharsetAndContentIsNotNone(
+        BaseRequestTestCase, PropertyDataProvided):
+
+    additional_mocks = ['data']
+
+    def setup(self):
+        BaseRequestTestCase.setup(self)
+        self.response['content-type'] = 'application/javascript; charset=UTF-8'
+        self.module.httplib2.Http().request.return_value = (
+            self.response, self.content)
+
+        self.returned = self.json_requester.request(
+            self.method, self.url, self.data)
+
+    def should_return_json(self):
+        assert self.returned == self.module.json.loads()
